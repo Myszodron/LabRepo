@@ -9,6 +9,45 @@ public class Main {
     //Main doesn't contain any attributes
     public static void main(String[] args) {
 
+        Matrix M = new Matrix(3, 6);
+        System.out.println("Matrix M:");
+        M.print();
+
+        Matrix MT = M.transpose();
+        System.out.println("Transpose of M:");
+        MT.print();
+
+        Matrix product = M.multiply(MT);
+        System.out.println("M * Mᵀ:");
+        if (product != null) {
+            product.print();
+        } else {
+            System.out.println("Cannot multiply");
+        }
+
+        System.out.println("Spiral of M:");
+        int[] spiral = M.spiral();
+        for (int v : spiral) {
+            System.out.print(v + " ");
+        }
+        System.out.println();
+        System.out.println();
+
+
+        Circle c = new Circle(4.0);
+        System.out.println("CIRCLE");
+        System.out.println("Radius = " + c.getRadius());
+        System.out.println("Circumference = " + c.Circumference());
+        System.out.println("Area = " + c.area());
+        System.out.println();
+
+
+        Sphere s = new Sphere(4.0);
+        System.out.println("SPHERE");
+        System.out.println("Radius = " + s.getRadius());
+        System.out.println("Surface area = " + s.surfaceArea());
+        System.out.println("Volume = " + s.volume());
+        System.out.println();
     }
 }
 
