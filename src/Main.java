@@ -1,3 +1,4 @@
+import java.util.*;
 //Variables - private - encapsulation
 //Constructors - public - can create objects from outside the class
 //Getters and Setters - public - outside code can read or update in a controlled way
@@ -7,6 +8,7 @@
 public class Main {
     //Main doesn't contain any attributes
     public static void main(String[] args) {
+
     }
 }
 
@@ -16,6 +18,7 @@ class Matrix {
     private int rows;
     private int columns;
     private int[][] data;
+    //
 
     public Matrix(int rows, int columns) {
         this.rows = rows;
@@ -24,6 +27,9 @@ class Matrix {
         fillRandom();
     }
 
+    //O - big-O notation
+
+    //Complexity: O(r * c)
     private void fillRandom() {
         for (int i = 0; i < rows; i++)
             for (int j = 0; j < columns; j++)
@@ -33,8 +39,6 @@ class Matrix {
     public int getRows() {
         return rows;
     }
-
-
     public int getColumns() {
         return columns;
     }
@@ -46,6 +50,7 @@ class Matrix {
         columns = newData[0].length;
     }
 
+    //Complexity O(r * c)
     public void print() {
         for (int i = 0; i < rows; i++) {
             for (int j = 0; j < columns; j++) {
@@ -56,6 +61,7 @@ class Matrix {
         System.out.println();
     }
 
+    //Complexity O(r * c)
     public Matrix transpose() {
         Matrix t = new Matrix(columns, rows);
         for (int i = 0; i < rows; i++)
@@ -64,6 +70,7 @@ class Matrix {
         return t;
     }
 
+    //Complexity: O(r * c * other.c)
     public Matrix multiply(Matrix other) {
         if (this.columns != other.rows)
             return null;
@@ -82,6 +89,7 @@ class Matrix {
         return res;
     }
 
+    // Complexity: O(r * c)
     public int[] spiral() {
         int[] out = new int[rows * columns];
         int idx = 0;
@@ -119,6 +127,7 @@ class Circle {
 
     //Attributes
     private double radius;
+    //
 
     public Circle(double radius) {
         this.radius = radius;
@@ -145,6 +154,7 @@ class Sphere {
 
     //Attributes
     private double radius;
+    //
 
     public Sphere(double radius) {
         this.radius = radius;
