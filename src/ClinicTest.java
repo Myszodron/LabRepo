@@ -290,6 +290,15 @@ public class ClinicTest {
         clinic.registerPatient(p1);
         clinic.registerPatient(p2);
 
+        Appointment a1 = new Appointment("2026-01-12 10:00", p1, d1);
+        Appointment a2 = new Appointment("2025-12-30 17:30", p2, d1);
+
+        clinic.addAppointment(a1);
+        clinic.addAppointment(a2);
+
+        clinic.showAppointmentsForPatient(p1);
+        clinic.showAppointmentsForDoctor(d1);
+
         System.out.println("People");
         p1.introduce();
         d1.introduce();
