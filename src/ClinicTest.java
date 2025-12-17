@@ -89,7 +89,21 @@ class Patient extends Person implements Treatable {
         System.out.println("Patient with condition \"" + condition + "\" is receiving treatment.");
     }
 
-    public void addPrescription
+    public void addPrescription(Prescription p) {
+        prescriptions.add(p);
+    }
+
+    public ArrayList<Prescription> getPrescriptions() {
+        return prescriptions;
+    }
+
+    public void addApointment(Appointment a) {
+        appointments.add(a);
+    }
+
+    public ArrayList<Appointment> getAppointments() {
+        return appointments;
+    }
 }
 class Doctor extends Staff {
 
