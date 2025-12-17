@@ -48,7 +48,7 @@ abstract class Staff extends Person {
 
 class Treatment {
 
-    protected String.name;
+    protected String name;
 
     public Treatment(String name) {
         this.name = name;
@@ -300,8 +300,14 @@ public class ClinicTest {
         clinic.showAppointmentsForDoctor(d1);
 
         Prescription pre1 = d1.createPrescription();
-        pre1.addTreatment(new Medicine("Antibiotics"));
+        pre1.addTreatment(new Medicine("Pain medication"));
         pre1.addTreatment(new Treatment("Put cast"));
+
+        clinic.addPrescription(p2, pre1);
+
+        clinic.showPatientsWithMedicine("Pain medication");
+
+
 
         System.out.println("People");
         p1.introduce();
