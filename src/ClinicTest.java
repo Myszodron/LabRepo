@@ -220,6 +220,22 @@ class ClinicSystem implements ClinicOperations {
         }
     }
 
+    public void showAppointmentsForDoctor(Doctor doctor) {
+        System.out.println("Appointments for " + doctor.name);
+        for (Appointment a : doctor.getAppointments()) {
+            a.print();
+        }
+    }
+
+    public void addPrescription(Patient patient, Prescription prescription) {
+        patient.addPrescription(prescription);
+    }
+
+    public void showPatientsWithMedicine(String medicineName) {
+        System.out.println("Patients with medicine: " + medicineName);
+
+
+    }
 }
 
 public class ClinicTest {
