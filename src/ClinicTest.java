@@ -160,6 +160,8 @@ class Patient extends Person implements Treatable {
 class Doctor extends Staff {
 
     private ArrayList<Appointment> appointments = new ArrayList<>();
+    private String medicine = "Antibiotics";
+
 
     public Doctor(String name, int age) {
         super(name, age, "Doctor");
@@ -181,7 +183,7 @@ class Doctor extends Staff {
         return true;
     }
 
-    public void prescribeMedicine(Patient patient, String medicine) {
+    public void prescribeMedicine(Patient patient) {
         System.out.println("Doctor prescribes " + medicine +
                 " to patient " + patient.name);
     }
@@ -335,7 +337,7 @@ public class ClinicTest {
         System.out.println();
 
         System.out.println("\nSpecific Job Actions");
-        d1.prescribeMedicine(p1,"Antibiotics");
+        d1.prescribeMedicine(p1);
         n1.checkVitals(p2);
     }
 }
