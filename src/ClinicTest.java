@@ -1,3 +1,4 @@
+//https://github.com/Myszodron
 
 interface Treatable {
 
@@ -53,7 +54,7 @@ class Doctor extends Staff {
     }
 
     public void performDuties() {
-       System.out.println(" Doctor is treating patients and prescribing medicine");
+       System.out.println("Doctor is treating patients and prescribing medicine");
     }
 
     public void prescribeMedicine(String  medicine) {
@@ -72,7 +73,7 @@ class Nurse extends Staff {
     }
 
     public void checkVitals(Patient patient) {
-        System.out.println("Nurse is checking vitals of: " + patient);
+        System.out.println("Nurse is checking vitals of: " + patient.name);
     }
 }
 
@@ -96,8 +97,26 @@ public class ClinicTest {
         Doctor d1 = new Doctor("Dr. Kowalski", 42);
         Nurse n1 = new Nurse("Hanna", 38);
         Receptionist r1 = new Receptionist("Jacek", 30);
+
+        System.out.println("People");
+        p1.introduce();
+        d1.introduce();
+        n1.introduce();
+        r1.introduce();
+        System.out.println();
+
+        System.out.println("Duties");
+        d1.performDuties();
+        n1.performDuties();
+        r1.performDuties();
+        System.out.println();
+
+        System.out.println("Patient's Treatment");
+        p1.receiveTreatment();
+        System.out.println();
+
+        System.out.println("Specific Job Actions");
+        d1.prescribeMedicine("Antibiotics");
+        n1.checkVitals(p1);
     }
 }
-
-
-
