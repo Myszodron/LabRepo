@@ -76,6 +76,17 @@ class Nurse extends Staff {
     }
 }
 
+class Receptionist extends Staff {
+
+    public Receptionist(String name, int age) {
+        super(name, age, "Receptionist");
+    }
+
+    public void performDuties() {
+        System.out.println("Receptionist is scheduling appointments");
+    }
+}
+
 
 
 
