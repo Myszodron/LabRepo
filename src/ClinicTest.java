@@ -87,6 +87,17 @@ class Receptionist extends Staff {
     }
 }
 
+public class ClinicTest {
+
+    public static void main(String[] args) {
+
+        Patient p1 = new Patient("Daria", 24, "influenza");
+
+        Doctor d1 = new Doctor("Dr. Kowalski", 42);
+        Nurse n1 = new Nurse("Hanna", 38);
+        Receptionist r1 = new Receptionist("Jacek", 30);
+    }
+}
 
 
 
