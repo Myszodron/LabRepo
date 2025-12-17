@@ -145,6 +145,9 @@ class Doctor extends Staff {
     }
 
     public Prescription createPrescription() {
+        return new Prescription(this);
+    }
+    public boolean canAddAppointment(String dateTime) {
         for (Appointment a : appointments) {
             if (a.getDateTime().equals(dateTime))
                 return false;
@@ -187,8 +190,39 @@ class Receptionist extends Staff {
     }
 }
 
-public class ClinicTest {
+class ClinicSystem implements ClinicOperations {
 
+    private ArrayList<Appointment> appointments = new ArrayList<>();
+    private ArrayList<Patient> patients = new ArrayList<>();
+
+    public void registerPatient(Patient p) {
+        patients.add(p);
+    }
+
+    public void addAppointment(Appointment appointment) {
+
+        Doctor d = appointment.getDoctor();
+
+        if (!d.canAddAppointment(appointment.getDateTime())) {
+            System.out.println("Doctor already has an appointment at this time.");
+            return;
+        }
+
+        appointments.add(appointment);
+        appointment.getPatient().addAppointment(appointment);
+        d.addAppointment(appointment);
+    }
+
+    public void showAppointmentsForPatient(Patient patient) {
+        System.out.println("Appointment for patient " + patient.name);
+        for (Appointment a : patient.getAppointments()) {
+            a.print();
+        }
+    }
+
+}
+
+public class ClinicTest {
     public static void main(String[] args) {
 
         Patient p1 = new Patient("Daria", 24, "influenza");
