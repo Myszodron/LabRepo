@@ -33,6 +33,23 @@ abstract class Staff extends Person {
     public abstract void performDuties();
 }
 
+class Treatment {
+
+
+}
+
+class Medicine {
+
+}
+
+class Prescription{
+
+}
+
+class Appointment {
+
+}
+
 class Patient extends Person implements Treatable {
 
     private String condition;
