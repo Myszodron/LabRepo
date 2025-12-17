@@ -1,4 +1,5 @@
 //https://github.com/Myszodron
+import  java.util.ArrayList;
 
 interface Treatable {
 
@@ -20,6 +21,18 @@ abstract class Person {
     }
 }
 
+abstract class Staff extends Person {
+
+    protected String role;
+
+    public Staff(String name, int age, String role) {
+        super(name, age);
+        this.role = role;
+    }
+
+    public abstract void performDuties();
+}
+
 class Patient extends Person implements Treatable {
 
     private String condition;
@@ -34,19 +47,6 @@ class Patient extends Person implements Treatable {
         System.out.println("Patient with condition \"" + condition + "\" is receiving treatment.");
     }
 }
-
-abstract class Staff extends Person {
-
-    protected String role;
-
-    public Staff(String name, int age, String role) {
-        super(name, age);
-        this.role = role;
-    }
-
-    public abstract void performDuties();
-}
-
 class Doctor extends Staff {
 
    public Doctor(String name, int age) {
