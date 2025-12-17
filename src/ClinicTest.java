@@ -72,6 +72,33 @@ class Prescription{
 
 class Appointment {
 
+    private String dateTime;
+    private String Patient patient;
+    private Doctor doctor;
+
+    public Appointment(String dateTime, Patient patient, Doctor doctor) {
+        this.dateTime = dateTime;
+        this.patient = patient;
+        this.doctor = doctor;
+    }
+
+    public String getDateTime() {
+        return dateTime;
+    }
+
+    public Patient getPatient() {
+        return patient;
+    }
+
+    public Doctor getDoctor() {
+        return doctor;
+    }
+
+    public void print() {
+        System.out.println("Appointment at " + dateTime +
+                " Patient: " + patient.name +
+                " Doctor: " + doctor.name);
+    }
 }
 
 class Patient extends Person implements Treatable {
@@ -97,7 +124,7 @@ class Patient extends Person implements Treatable {
         return prescriptions;
     }
 
-    public void addApointment(Appointment a) {
+    public void addAppointment(Appointment a) {
         appointments.add(a);
     }
 
@@ -117,8 +144,20 @@ class Doctor extends Staff {
        System.out.println("Doctor is treating patients and prescribing medicine");
     }
 
-    public void prescribeMedicine(String  medicine) {
-       System.out.println("Doctor prescribes: " + medicine);
+    public Prescription createPrescription() {
+        for (Appointment a : appointments) {
+            if (a.getDateTime().equals(dateTime))
+                return false;
+        }
+        return true;
+    }
+
+    public void addAppointment(Appointment a) {
+        appointments.add(a);
+    }
+
+    public ArrayList<Appointment> getAppointments() {
+        return appointments;
     }
 }
 
@@ -176,7 +215,7 @@ public class ClinicTest {
         System.out.println();
 
         System.out.println("Specific Job Actions");
-        d1.prescribeMedicine("Antibiotics");
+        d1.createPrescription();
         n1.checkVitals(p1);
     }
 }
