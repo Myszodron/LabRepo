@@ -21,11 +21,27 @@ interface ClinicOperations {
 
 abstract class Person {
 
-    protected String name;
-    protected int age;
+    private String name;
+    private int age;
 
     public Person(String name, int age) {
         this.name = name;
+        this.age = age;
+    }
+
+    public String getName() {
+        return name;
+    }
+
+    public int getAge() {
+        return age;
+    }
+
+    public void setName(String name) {
+        this.name = name;
+    }
+
+    public void setAge(int age) {
         this.age = age;
     }
 
@@ -36,10 +52,18 @@ abstract class Person {
 
 abstract class Staff extends Person {
 
-    protected String role;
+    private String role;
 
     public Staff(String name, int age, String role) {
         super(name, age);
+        this.role = role;
+    }
+
+    public String getRole() {
+        return role;
+    }
+
+    public void setRole() {
         this.role = role;
     }
 
@@ -48,7 +72,7 @@ abstract class Staff extends Person {
 
 class Treatment {
 
-    protected String name;
+    private String name;
 
     public Treatment(String name) {
         this.name = name;
@@ -88,7 +112,7 @@ class Prescription {
     }
 
     public void print() {
-        System.out.println("Prescribed by: " + doctor.name);
+        System.out.println("Prescribed by: " + doctor.getName());
         for (Treatment t : treatments) {
             System.out.println("- " + t.getName());
         }
@@ -121,8 +145,8 @@ class Appointment {
 
     public void print() {
         System.out.println("Appointment at " + dateTime +
-                " Patient: " + patient.name +
-                " Doctor: " + doctor.name);
+                " Patient: " + patient.getName() +
+                " Doctor: " + doctor.getName());
     }
 }
 
@@ -135,6 +159,14 @@ class Patient extends Person implements Treatable {
     public Patient(String name, int age, String condition) {
         super(name, age);
         this.condition = condition;
+    }
+
+    public String getCondition() {
+        return condition;
+    }
+
+    public void setCondition (String condition) {
+        this.condition= condition;
     }
 
     public void receiveTreatment() {
@@ -185,7 +217,7 @@ class Doctor extends Staff {
 
     public void prescribeMedicine(Patient patient) {
         System.out.println("Doctor prescribes " + medicine +
-                " to patient " + patient.name);
+                " to patient " + patient.getName());
     }
 
     public void addAppointment(Appointment a) {
@@ -208,7 +240,7 @@ class Nurse extends Staff {
     }
 
     public void checkVitals(Patient patient) {
-        System.out.println("Nurse is checking vitals of: " + patient.name);
+        System.out.println("Nurse is checking vitals of: " + patient.getName());
     }
 }
 
@@ -247,14 +279,14 @@ class ClinicSystem implements ClinicOperations {
     }
 
     public void showAppointmentsForPatient(Patient patient) {
-        System.out.println("\nAppointment for patient " + patient.name);
+        System.out.println("\nAppointment for patient " + patient.getName());
         for (Appointment a : patient.getAppointments()) {
             a.print();
         }
     }
 
     public void showAppointmentsForDoctor(Doctor doctor) {
-        System.out.println("\nAppointments for " + doctor.name);
+        System.out.println("\nAppointments for " + doctor.getName());
         for (Appointment a : doctor.getAppointments()) {
             a.print();
         }
@@ -271,8 +303,8 @@ class ClinicSystem implements ClinicOperations {
             for (Prescription pr : p.getPrescriptions()) {
                 for (Treatment t : pr.getTreatments()) {
                     if (t instanceof Medicine && t.getName().equals(medicineName)) {
-                        System.out.println(p.name + " (Prescribed by " +
-                                pr.getDoctor().name + ")");
+                        System.out.println(p.getName() + " (Prescribed by " +
+                                pr.getDoctor().getName() + ")");
 
 
                     }
