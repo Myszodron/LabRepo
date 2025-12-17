@@ -6,6 +6,19 @@ interface Treatable {
 void receiveTreatment();
 }
 
+interface ClinicOperations {
+
+    void addAppointment(Appointment appointment);
+
+    void showAppointmentsForPatient(Patient patient);
+
+    void showAppointmentsForDoctor(Doctor doctor);
+
+    void addPrescription(Patient patient, Prescription prescription);
+
+    void showPatientsWithMedicine(String medicineName);
+}
+
 abstract class Person {
 
     protected String name;
@@ -35,11 +48,22 @@ abstract class Staff extends Person {
 
 class Treatment {
 
+    protected String.name;
 
+    public Treatment(String name) {
+        this.name = name;
+    }
+
+    public String getName() {
+        return name;
+    }
 }
 
-class Medicine {
+class Medicine extends Treatment {
 
+    public Medicine(String name) {
+        super(name);
+    }
 }
 
 class Prescription{
@@ -53,8 +77,9 @@ class Appointment {
 class Patient extends Person implements Treatable {
 
     private String condition;
+    private ArrayList<Prescription> prescriptions = new ArrayList<>();
+    private ArrayList<Appointment> appointments = new ArrayList<>();
 
-    // Constructor initializes person data and patient condition
     public Patient(String name, int age, String condition) {
         super(name, age);
         this.condition = condition;
@@ -63,10 +88,14 @@ class Patient extends Person implements Treatable {
     public void receiveTreatment() {
         System.out.println("Patient with condition \"" + condition + "\" is receiving treatment.");
     }
+
+    public void addPrescription
 }
 class Doctor extends Staff {
 
-   public Doctor(String name, int age) {
+    private ArrayList<Appointment> appointments = new ArrayList<>();
+
+    public Doctor(String name, int age) {
         super(name, age, "Doctor");
     }
 
