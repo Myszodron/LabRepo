@@ -98,7 +98,7 @@ class Prescription {
 class Appointment {
 
     private String dateTime;
-    private String Patient patient;
+    private Patient patient;
     private Doctor doctor;
 
     public Appointment(String dateTime, Patient patient, Doctor doctor) {
