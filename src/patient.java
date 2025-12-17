@@ -1,4 +1,3 @@
-import javax.xml.namespace.QName;
 
 interface Treatable {
 
@@ -59,6 +58,21 @@ class Doctor extends Staff {
 
     public void prescribeMedicine(String  medicine) {
        System.out.println("Doctor prescribes: " + medicine);
+    }
+}
+
+class Nurse extends Staff {
+
+    public Nurse(String name, int age) {
+        super(name, age, "Nurse");
+    }
+
+    public void performDuties() {
+        System.out.println("Nurse is checking patient's condition and vitals");
+    }
+
+    public void checkVitals(Patient patient) {
+        System.out.println("Nurse is checking vitals of: " + patient);
     }
 }
 
