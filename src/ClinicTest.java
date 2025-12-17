@@ -281,7 +281,7 @@ public class ClinicTest {
         ClinicSystem clinic = new ClinicSystem();
 
         Patient p1 = new Patient("Daria", 24, "Influenza");
-        Patient p2 = new Patient("Jan", 18, "Broken rib");
+        Patient p2 = new Patient("Jan", 18, "Broken leg");
 
         Doctor d1 = new Doctor("Dr. Kowalski", 42);
         Nurse n1 = new Nurse("Hanna", 38);
@@ -298,6 +298,10 @@ public class ClinicTest {
 
         clinic.showAppointmentsForPatient(p1);
         clinic.showAppointmentsForDoctor(d1);
+
+        Prescription pre1 = d1.createPrescription();
+        pre1.addTreatment(new Medicine("Antibiotics"));
+        pre1.addTreatment(new Treatment("Put cast"));
 
         System.out.println("People");
         p1.introduce();
