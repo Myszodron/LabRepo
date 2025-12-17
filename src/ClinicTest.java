@@ -66,8 +66,33 @@ class Medicine extends Treatment {
     }
 }
 
-class Prescription{
+class Prescription {
 
+    private Doctor doctor;
+    private ArrayList<Treatment> treatments = new ArrayList<>();
+
+    public Prescription(Doctor doctor) {
+        this.doctor = doctor;
+    }
+
+    public void addTreatment(Treatment t) {
+        treatments.add(t);
+    }
+
+    public Doctor getDoctor() {
+        return doctor;
+    }
+
+    public ArrayList<Treatment> getTreatments() {
+        return treatments;
+    }
+
+    public void print() {
+        System.out.println("Prescribed by: " + doctor.name);
+        for (Treatment t : treatments) {
+            System.out.println("- " + t.getName());
+        }
+    }
 }
 
 class Appointment {
@@ -234,18 +259,36 @@ class ClinicSystem implements ClinicOperations {
     public void showPatientsWithMedicine(String medicineName) {
         System.out.println("Patients with medicine: " + medicineName);
 
+        for (Patient p : patients) {
+            for (Prescription pr : p.getPrescriptions()) {
+                for (Treatment t : pr.getTreatments()) {
+                    if (t instanceof Medicine && t.getName().equals(medicineName)) {
+                        System.out.println(p.name + " (Prescribed by " +
+                                pr.getDoctor().name + ")");
 
+
+                    }
+                }
+            }
+        }
     }
 }
 
 public class ClinicTest {
+
     public static void main(String[] args) {
 
-        Patient p1 = new Patient("Daria", 24, "influenza");
+        ClinicSystem clinic = new ClinicSystem();
+
+        Patient p1 = new Patient("Daria", 24, "Influenza");
+        Patient p2 = new Patient("Jan", 18, "Broken rib");
 
         Doctor d1 = new Doctor("Dr. Kowalski", 42);
         Nurse n1 = new Nurse("Hanna", 38);
         Receptionist r1 = new Receptionist("Jacek", 30);
+
+        clinic.registerPatient(p1);
+        clinic.registerPatient(p2);
 
         System.out.println("People");
         p1.introduce();
