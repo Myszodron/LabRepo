@@ -1,3 +1,5 @@
+import javax.xml.namespace.QName;
+
 interface Treatable {
 
 void receiveTreatment();
@@ -43,7 +45,23 @@ abstract class Staff extends Person {
     }
 
     public abstract void performDuties();
-
-
-
 }
+
+class Doctor extends Staff {
+
+   public Doctor(String name, int age) {
+        super(name, age, "Doctor");
+    }
+
+    public void performDuties() {
+       System.out.println(" Doctor is treating patients and prescribing medicine");
+    }
+
+    public void prescribeMedicine(String  medicine) {
+       System.out.println("Doctor prescribes: " + medicine);
+    }
+}
+
+
+
+
