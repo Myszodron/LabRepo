@@ -138,7 +138,7 @@ class Patient extends Person implements Treatable {
     }
 
     public void receiveTreatment() {
-        System.out.println("Patient with condition \"" + condition + "\" is receiving treatment.");
+        System.out.print("Patient with condition \"" + condition + "\" is receiving treatment.");
     }
 
     public void addPrescription(Prescription p) {
@@ -172,12 +172,18 @@ class Doctor extends Staff {
     public Prescription createPrescription() {
         return new Prescription(this);
     }
+
     public boolean canAddAppointment(String dateTime) {
         for (Appointment a : appointments) {
             if (a.getDateTime().equals(dateTime))
                 return false;
         }
         return true;
+    }
+
+    public void prescribeMedicine(Patient patient, String medicine) {
+        System.out.println("Doctor prescribes " + medicine +
+                " to patient " + patient.name);
     }
 
     public void addAppointment(Appointment a) {
@@ -239,14 +245,14 @@ class ClinicSystem implements ClinicOperations {
     }
 
     public void showAppointmentsForPatient(Patient patient) {
-        System.out.println("Appointment for patient " + patient.name);
+        System.out.println("\nAppointment for patient " + patient.name);
         for (Appointment a : patient.getAppointments()) {
             a.print();
         }
     }
 
     public void showAppointmentsForDoctor(Doctor doctor) {
-        System.out.println("Appointments for " + doctor.name);
+        System.out.println("\nAppointments for " + doctor.name);
         for (Appointment a : doctor.getAppointments()) {
             a.print();
         }
@@ -257,7 +263,7 @@ class ClinicSystem implements ClinicOperations {
     }
 
     public void showPatientsWithMedicine(String medicineName) {
-        System.out.println("Patients with medicine: " + medicineName);
+        System.out.println("\nPatients with medicine: " + medicineName);
 
         for (Patient p : patients) {
             for (Prescription pr : p.getPrescriptions()) {
@@ -309,7 +315,7 @@ public class ClinicTest {
 
 
 
-        System.out.println("People");
+        System.out.println("\nPeople");
         p1.introduce();
         d1.introduce();
         n1.introduce();
@@ -325,9 +331,11 @@ public class ClinicTest {
         System.out.println("Patient's Treatment");
         p1.receiveTreatment();
         System.out.println();
+        p2.receiveTreatment();
+        System.out.println();
 
-        System.out.println("Specific Job Actions");
-        d1.createPrescription();
-        n1.checkVitals(p1);
+        System.out.println("\nSpecific Job Actions");
+        d1.prescribeMedicine(p1,"Antibiotics");
+        n1.checkVitals(p2);
     }
 }
