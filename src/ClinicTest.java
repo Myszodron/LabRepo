@@ -25,6 +25,13 @@ abstract class Person {
     private int age;
 
     public Person(String name, int age) {
+        if (name == null || name.trim().isEmpty()) {
+            throw new IllegalArgumentException("Name can't be empty");
+        }
+        if (age <= 0) {
+            throw new IllegalArgumentException("Age can't be negative");
+        }
+
         this.name = name;
         this.age = age;
     }
@@ -56,6 +63,10 @@ abstract class Staff extends Person {
 
     public Staff(String name, int age, String role) {
         super(name, age);
+
+        if (role == null || role.trim().isEmpty()) {
+            throw new IllegalArgumentException("Role can't be empty");
+        }
         this.role = role;
     }
 
@@ -158,6 +169,12 @@ class Patient extends Person implements Treatable {
 
     public Patient(String name, int age, String condition) {
         super(name, age);
+
+        if (condition == null || condition.trim().isEmpty()) {
+            throw new IllegalArgumentException("Condition can't be empty");
+        }
+
+
         this.condition = condition;
     }
 
