@@ -1,7 +1,68 @@
 //https://github.com/Myszodron
 import  java.util.ArrayList;
 
-interface Treatable {
+public class ClinicTest {
+
+    public static void main(String[] args) {
+        new ClinicTest().ClinicInterface();
+    }
+
+    private void ClinicInterface() {
+
+        ClinicSystem clinic = new ClinicSystem();
+
+        Patient p1 = new Patient("Daria", 24, "Influenza");
+        Patient p2 = new Patient("Jan", 18, "Broken leg");
+
+        Doctor d1 = new Doctor("Dr. Kowalski", 42);
+        Nurse n1 = new Nurse("Hanna", 38);
+        Receptionist r1 = new Receptionist("Jacek", 30);
+
+        clinic.registerPatient(p1);
+        clinic.registerPatient(p2);
+
+        Appointment a1 = new Appointment("2026-01-12 10:00", p1, d1);
+        Appointment a2 = new Appointment("2025-12-30 17:30", p2, d1);
+
+        clinic.addAppointment(a1);
+        clinic.addAppointment(a2);
+
+        clinic.showAppointmentsForPatient(p1);
+        clinic.showAppointmentsForDoctor(d1);
+
+        Prescription pre1 = d1.createPrescription();
+        pre1.addTreatment(new Medicine("Pain medication"));
+        pre1.addTreatment(new Treatment("Put cast"));
+
+        clinic.addPrescription(p2, pre1);
+        clinic.showPatientsWithMedicine("Pain medication");
+
+
+        System.out.println("\nPeople");
+        p1.introduce();
+        d1.introduce();
+        n1.introduce();
+        r1.introduce();
+        System.out.println();
+
+        System.out.println("Duties");
+        d1.performDuties();
+        n1.performDuties();
+        r1.performDuties();
+        System.out.println();
+
+        System.out.println("Patient's Treatment");
+        p1.receiveTreatment();
+        System.out.println();
+        p2.receiveTreatment();
+        System.out.println();
+
+        System.out.println("\nSpecific Job Actions");
+        d1.prescribeMedicine(p1);
+        n1.checkVitals(p2);
+    }
+
+    interface Treatable {
 
 void receiveTreatment();
 }
@@ -81,7 +142,7 @@ abstract class Staff extends Person {
     public abstract void performDuties();
 }
 
-class Treatment {
+static class Treatment {
 
     private String name;
 
@@ -94,7 +155,7 @@ class Treatment {
     }
 }
 
-class Medicine extends Treatment {
+static class Medicine extends Treatment {
 
     public Medicine(String name) {
         super(name);
@@ -331,62 +392,5 @@ class ClinicSystem implements ClinicOperations {
     }
 }
 
-public class ClinicTest {
 
-    public static void main(String[] args) {
-
-        ClinicSystem clinic = new ClinicSystem();
-
-        Patient p1 = new Patient("Daria", 24, "Influenza");
-        Patient p2 = new Patient("Jan", 18, "Broken leg");
-
-        Doctor d1 = new Doctor("Dr. Kowalski", 42);
-        Nurse n1 = new Nurse("Hanna", 38);
-        Receptionist r1 = new Receptionist("Jacek", 30);
-
-        clinic.registerPatient(p1);
-        clinic.registerPatient(p2);
-
-        Appointment a1 = new Appointment("2026-01-12 10:00", p1, d1);
-        Appointment a2 = new Appointment("2025-12-30 17:30", p2, d1);
-
-        clinic.addAppointment(a1);
-        clinic.addAppointment(a2);
-
-        clinic.showAppointmentsForPatient(p1);
-        clinic.showAppointmentsForDoctor(d1);
-
-        Prescription pre1 = d1.createPrescription();
-        pre1.addTreatment(new Medicine("Pain medication"));
-        pre1.addTreatment(new Treatment("Put cast"));
-
-        clinic.addPrescription(p2, pre1);
-
-        clinic.showPatientsWithMedicine("Pain medication");
-
-
-
-        System.out.println("\nPeople");
-        p1.introduce();
-        d1.introduce();
-        n1.introduce();
-        r1.introduce();
-        System.out.println();
-
-        System.out.println("Duties");
-        d1.performDuties();
-        n1.performDuties();
-        r1.performDuties();
-        System.out.println();
-
-        System.out.println("Patient's Treatment");
-        p1.receiveTreatment();
-        System.out.println();
-        p2.receiveTreatment();
-        System.out.println();
-
-        System.out.println("\nSpecific Job Actions");
-        d1.prescribeMedicine(p1);
-        n1.checkVitals(p2);
-    }
 }
