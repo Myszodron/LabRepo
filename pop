@@ -1,0 +1,197 @@
+corretion
+import java.util.Random;
+
+public class TasksWithValidation {
+
+    public static void main(String[] args) {
+        task1();
+        task2();
+        task3();
+        task4();
+        task5();
+    }
+Zad 1 
+    private static void task1() {
+
+        int n = 6;  // dane wejściowe
+
+        if (n <= 0) {
+            throw new IllegalArgumentException("n must be positive");
+        }
+
+        int[] squares = new int[n];
+        int sumEven = 0;
+
+        System.out.println("Task 1:");
+
+        for (int i = 0; i < n; i++) {
+            squares[i] = (i + 1) * (i + 1);
+            System.out.print(squares[i] + " ");
+
+            if (squares[i] % 2 == 0) {
+                sumEven += squares[i];
+            }
+        }
+
+        System.out.println("\nSum of even values: " + sumEven);
+        System.out.println();
+    }
+
+Zad 2 
+private static void task2() {
+
+        int[] arr = {12, -5, 20, 7, 30, 3, -2};
+
+        if (arr == null || arr.length < 2) {
+            throw new IllegalArgumentException("Array must contain at least two elements");
+        }
+
+        int countDiv5 = 0;
+        int max = arr[0];
+        int secondMax = Integer.MIN_VALUE;
+
+        int sumPositive = 0;
+        int countPositive = 0;
+
+        for (int x : arr) {
+
+            if (x % 5 == 0) countDiv5++;
+
+            if (x > max) {
+                secondMax = max;
+                max = x;
+            } else if (x > secondMax && x != max) {
+                secondMax = x;
+            }
+
+            if (x > 0) {
+                sumPositive += x;
+                countPositive++;
+            }
+        }
+
+        double mean = countPositive > 0
+                ? (double) sumPositive / countPositive
+                : 0;
+
+        System.out.println("Task 2:");
+        System.out.println("Divisible by 5: " + countDiv5);
+        System.out.println("Second largest: " + secondMax);
+        System.out.println("Arithmetic mean (>0): " + mean);
+        System.out.println();
+    }
+Zad 3 
+private static void task3() {
+
+        int[][] A = {
+                {1, 2},
+                {3, 4}
+        };
+
+        int[][] B = {
+                {5, 6},
+                {7, 8}
+        };
+
+        if (A == null || B == null) {
+            throw new IllegalArgumentException("Matrices cannot be null");
+        }
+
+        if (A.length == 0 || B.length == 0 ||
+            A.length != B.length ||
+            A[0].length != B[0].length ||
+            A.length != A[0].length) {
+            throw new IllegalArgumentException("Matrices must be square and same size");
+        }
+
+        int n = A.length;
+        int[][] C = new int[n][n];
+
+        int sumA = 0;
+        int sumB = 0;
+
+        for (int i = 0; i < n; i++) {
+            for (int j = 0; j < n; j++) {
+                C[i][j] = A[i][j] * B[i][j];
+                sumA += A[i][j];
+                sumB += B[i][j];
+            }
+        }
+
+        System.out.println("Task 3:");
+        for (int[] row : C) {
+            for (int x : row) System.out.print(x + " ");
+            System.out.println();
+        }
+
+        System.out.println("Same sum? " + (sumA == sumB));
+        System.out.println();
+    }
+Zad 4 
+private static void task4() {
+
+        Random rand = new Random();
+        int secret = rand.nextInt(100) + 1;
+
+        if (secret < 1 || secret > 100) {
+            throw new IllegalStateException("Generated number out of range");
+        }
+
+        int attempts = 0;
+        int guess;
+
+        System.out.println("Task 4:");
+
+        do {
+            guess = rand.nextInt(100) + 1;
+
+            if (guess < 1 || guess > 100) {
+                throw new IllegalStateException("Guess out of range");
+            }
+
+            attempts++;
+
+            if (guess > secret)
+                System.out.println(guess + " -> Too high");
+            else if (guess < secret)
+                System.out.println(guess + " -> Too low");
+            else
+                System.out.println(guess + " -> Correct!");
+
+        } while (guess != secret);
+
+        System.out.println("Attempts needed: " + attempts);
+        System.out.println();
+    }
+Zad 5 
+private static void task5() {
+
+        String text = "Hello World 123";
+
+        if (text == null) {
+            throw new IllegalArgumentException("Text cannot be null");
+        }
+
+        int upper = 0;
+        int lower = 0;
+        boolean onlyLetters = true;
+
+        for (char c : text.toCharArray()) {
+
+            if (Character.isUpperCase(c)) upper++;
+            if (Character.isLowerCase(c)) lower++;
+
+            if (c != ' ' && !Character.isLetter(c)) {
+                onlyLetters = false;
+            }
+        }
+
+        String replaced = text.replaceAll("[0-9]", "#");
+
+        System.out.println("Task 5:");
+        System.out.println("Uppercase letters: " + upper);
+        System.out.println("Lowercase letters: " + lower);
+        System.out.println("Only letters (ignoring spaces): " + onlyLetters);
+        System.out.println("After replacing numbers: " + replaced);
+    }
+}
