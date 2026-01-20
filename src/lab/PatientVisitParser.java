@@ -1,3 +1,5 @@
+package lab;
+
 import java.io.*;
 import java.nio.file.*;
 import java.util.*;
@@ -10,9 +12,10 @@ import java.util.regex.*;
 public class PatientVisitParser {
 
     /// Loads visit data from a CSV file and generates a summary report
+    /// @param args command-line arguments -> not used
     public static void main(String[] args) {
         // Name of the CSV file (Must be in the project root directory)
-        String filePath = "data (1).csv";
+        String filePath = "src/lab/data (1).csv";
 
         // List that will store all accurately read patient visits
         List<PatientVisit> visits = new ArrayList<>();
@@ -25,8 +28,8 @@ public class PatientVisitParser {
             // Process each line separately
             for (String line : lines) {
 
-                // Reject empty lines
-                if (line.trim().isEmpty()) {
+                // Reject empty or quoted-empty lines
+                if (line.trim().isEmpty()|| line.trim().equals("\"\"")){
                     System.out.println("Empty line detected and rejected");
                     continue;
                 }
@@ -40,7 +43,7 @@ public class PatientVisitParser {
                     continue;
                 }
 
-                // Create PatientVisit object
+                // Create lab.PatientVisit object
                 visits.add(new PatientVisit(parts[0].trim(), parts[1].trim()));
             }
 
@@ -71,9 +74,11 @@ class PatientVisit {
     private String doctor;
 
     /// Creates a patient visit object and triggers data parsing
+    /// @param rawDate visit date from the CSV file
+    /// @param description textual visit description
     public PatientVisit(String rawDate, String description) {
-        this.rawDate = rawDate; // Visit date from the CSV file
-        this.description = description; // Text visit description
+        this.rawDate = rawDate;
+        this.description = description;
         parse();
     }
 
@@ -99,8 +104,9 @@ class PatientVisit {
     }
 
     /// Checks whether medication information was found
+    /// @return true if a patient took medication, false otherwise
     public boolean tookDrugs() {
-        return !medications.equals("not found"); // True if a patient took medication, false otherwise
+        return !medications.equals("not found");
     }
 
     @Override
@@ -118,11 +124,14 @@ class PatientVisit {
 class RegexUtils {
 
     /// Searches for the first occurrence of a regex pattern in the given text
+    /// @param regex regular expression pattern
+    /// @param text input text
+    /// @return matched value or "not found" if no match exists
     public static String find(String regex, String text) {
-        Pattern pattern = Pattern.compile(regex); // Regex - regular expression pattern
-        Matcher matcher = pattern.matcher(text); // Text - input text
+        Pattern pattern = Pattern.compile(regex);
+        Matcher matcher = pattern.matcher(text);
 
-        return matcher.find() ? matcher.group() : "not found"; // Return matched value or "not found" if no match exists
+        return matcher.find() ? matcher.group() : "not found";
     }
 }
 
@@ -130,7 +139,8 @@ class RegexUtils {
 class ReportGenerator {
 
     /// Prints a summary report of all parsed visits
-    public static void generate(List<PatientVisit> visits) { // Visits = list of patient visits records
+    /// @param visits list of patient visit records
+    public static void generate(List<PatientVisit> visits) {
         System.out.println("Number of records: " + visits.size());
 
         // Count patients who took medication
