@@ -19,6 +19,7 @@ public class PatientVisitParser {
 
         // List that will store all accurately read patient visits
         List<PatientVisit> visits = new ArrayList<>();
+        int rejectedLines = 0;
 
         // Try-with-resources ensures the file is closed automatically
         try {
@@ -29,8 +30,8 @@ public class PatientVisitParser {
             for (String line : lines) {
 
                 // Reject empty or quoted-empty lines
-                if (line.trim().isEmpty()|| line.trim().equals("\"\"")){
-                    System.out.println("Empty line detected and rejected");
+                if (line.trim().isEmpty() || line.trim().equals("\"\"")) {
+                    rejectedLines++;
                     continue;
                 }
 
@@ -46,6 +47,8 @@ public class PatientVisitParser {
                 // Create lab.PatientVisit object
                 visits.add(new PatientVisit(parts[0].trim(), parts[1].trim()));
             }
+
+            System.out.println("Rejected empty records: " + rejectedLines);
 
         } catch (IOException e) {
             e.printStackTrace();
