@@ -97,7 +97,7 @@ class PatientVisit {
         email = RegexUtils.find("[A-Za-z0-9._%+-]+@[A-Za-z0-9.-]+\\.[A-Za-z]{2,}", description);
 
         // Medications taken by patient
-        medications = RegexUtils.find("(?i)(took|taking|reported taking) ([A-Za-z, ]+)", description);
+        medications = RegexUtils.find("(?i)(took|takes|taking|reported taking)[^\\.]*", description);
 
         // Doctor name format
         doctor = RegexUtils.find("Doctor: [A-Za-z]+, [A-Za-z]+", description);
