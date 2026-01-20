@@ -4,10 +4,10 @@ import  java.util.ArrayList;
 public class ClinicTest {
 
     public static void main(String[] args) {
-        new ClinicTest().ClinicInterface();
+        new ClinicTest().clinicInterface();
     }
 
-    private void ClinicInterface() {
+    private void clinicInterface() {
 
         ClinicSystem clinic = new ClinicSystem();
 
@@ -64,327 +64,329 @@ public class ClinicTest {
 
     interface Treatable {
 
-void receiveTreatment();
-}
-
-interface ClinicOperations {
-
-    void addAppointment(Appointment appointment);
-
-    void showAppointmentsForPatient(Patient patient);
-
-    void showAppointmentsForDoctor(Doctor doctor);
-
-    void addPrescription(Patient patient, Prescription prescription);
-
-    void showPatientsWithMedicine(String medicineName);
-}
-
-abstract class Person {
-
-    private String name;
-    private int age;
-
-    public Person(String name, int age) {
-        if (name == null || name.trim().isEmpty()) {
-            throw new IllegalArgumentException("Name can't be empty");
-        }
-        if (age <= 0) {
-            throw new IllegalArgumentException("Age can't be negative");
-        }
-
-        this.name = name;
-        this.age = age;
+        void receiveTreatment();
     }
 
-    public String getName() {
-        return name;
+    interface ClinicOperations {
+
+        void addAppointment(Appointment appointment);
+
+        void showAppointmentsForPatient(Patient patient);
+
+        void showAppointmentsForDoctor(Doctor doctor);
+
+        void addPrescription(Patient patient, Prescription prescription);
+
+        void showPatientsWithMedicine(String medicineName);
     }
 
-    public int getAge() {
-        return age;
-    }
+    abstract class Person {
 
-    public void setName(String name) {
-        this.name = name;
-    }
+        private String name;
+        private int age;
 
-    public void setAge(int age) {
-        this.age = age;
-    }
+        public Person(String name, int age) {
+            if (name == null || name.trim().isEmpty()) {
+                throw new IllegalArgumentException("Name can't be empty");
+            }
+            if (age <= 0) {
+                throw new IllegalArgumentException("Age can't be negative");
+            }
 
-    public void introduce() {
-        System.out.println("My name is " + name + " and I'm " + age + " years old.");
-    }
-}
-
-abstract class Staff extends Person {
-
-    private String role;
-
-    public Staff(String name, int age, String role) {
-        super(name, age);
-
-        if (role == null || role.trim().isEmpty()) {
-            throw new IllegalArgumentException("Role can't be empty");
-        }
-        this.role = role;
-    }
-
-    public String getRole() {
-        return role;
-    }
-
-    public void setRole() {
-        this.role = role;
-    }
-
-    public abstract void performDuties();
-}
-
-static class Treatment {
-
-    private String name;
-
-    public Treatment(String name) {
-        this.name = name;
-    }
-
-    public String getName() {
-        return name;
-    }
-}
-
-static class Medicine extends Treatment {
-
-    public Medicine(String name) {
-        super(name);
-    }
-}
-
-class Prescription {
-
-    private Doctor doctor;
-    private ArrayList<Treatment> treatments = new ArrayList<>();
-
-    public Prescription(Doctor doctor) {
-        this.doctor = doctor;
-    }
-
-    public void addTreatment(Treatment t) {
-        treatments.add(t);
-    }
-
-    public Doctor getDoctor() {
-        return doctor;
-    }
-
-    public ArrayList<Treatment> getTreatments() {
-        return treatments;
-    }
-
-    public void print() {
-        System.out.println("Prescribed by: " + doctor.getName());
-        for (Treatment t : treatments) {
-            System.out.println("- " + t.getName());
-        }
-    }
-}
-
-class Appointment {
-
-    private String dateTime;
-    private Patient patient;
-    private Doctor doctor;
-
-    public Appointment(String dateTime, Patient patient, Doctor doctor) {
-        this.dateTime = dateTime;
-        this.patient = patient;
-        this.doctor = doctor;
-    }
-
-    public String getDateTime() {
-        return dateTime;
-    }
-
-    public Patient getPatient() {
-        return patient;
-    }
-
-    public Doctor getDoctor() {
-        return doctor;
-    }
-
-    public void print() {
-        System.out.println("Appointment at " + dateTime +
-                " Patient: " + patient.getName() +
-                " Doctor: " + doctor.getName());
-    }
-}
-
-class Patient extends Person implements Treatable {
-
-    private String condition;
-    private ArrayList<Prescription> prescriptions = new ArrayList<>();
-    private ArrayList<Appointment> appointments = new ArrayList<>();
-
-    public Patient(String name, int age, String condition) {
-        super(name, age);
-
-        if (condition == null || condition.trim().isEmpty()) {
-            throw new IllegalArgumentException("Condition can't be empty");
+            this.name = name;
+            this.age = age;
         }
 
-
-        this.condition = condition;
-    }
-
-    public String getCondition() {
-        return condition;
-    }
-
-    public void setCondition (String condition) {
-        this.condition= condition;
-    }
-
-    public void receiveTreatment() {
-        System.out.print("Patient with condition \"" + condition + "\" is receiving treatment.");
-    }
-
-    public void addPrescription(Prescription p) {
-        prescriptions.add(p);
-    }
-
-    public ArrayList<Prescription> getPrescriptions() {
-        return prescriptions;
-    }
-
-    public void addAppointment(Appointment a) {
-        appointments.add(a);
-    }
-
-    public ArrayList<Appointment> getAppointments() {
-        return appointments;
-    }
-}
-class Doctor extends Staff {
-
-    private ArrayList<Appointment> appointments = new ArrayList<>();
-    private String medicine = "Antibiotics";
-
-
-    public Doctor(String name, int age) {
-        super(name, age, "Doctor");
-    }
-
-    public void performDuties() {
-       System.out.println("Doctor is treating patients and prescribing medicine");
-    }
-
-    public Prescription createPrescription() {
-        return new Prescription(this);
-    }
-
-    public boolean canAddAppointment(String dateTime) {
-        for (Appointment a : appointments) {
-            if (a.getDateTime().equals(dateTime))
-                return false;
-        }
-        return true;
-    }
-
-    public void prescribeMedicine(Patient patient) {
-        System.out.println("Doctor prescribes " + medicine +
-                " to patient " + patient.getName());
-    }
-
-    public void addAppointment(Appointment a) {
-        appointments.add(a);
-    }
-
-    public ArrayList<Appointment> getAppointments() {
-        return appointments;
-    }
-}
-
-class Nurse extends Staff {
-
-    public Nurse(String name, int age) {
-        super(name, age, "Nurse");
-    }
-
-    public void performDuties() {
-        System.out.println("Nurse is checking patient's condition and vitals");
-    }
-
-    public void checkVitals(Patient patient) {
-        System.out.println("Nurse is checking vitals of: " + patient.getName());
-    }
-}
-
-class Receptionist extends Staff {
-
-    public Receptionist(String name, int age) {
-        super(name, age, "Receptionist");
-    }
-
-    public void performDuties() {
-        System.out.println("Receptionist is scheduling appointments");
-    }
-}
-
-class ClinicSystem implements ClinicOperations {
-
-    private ArrayList<Appointment> appointments = new ArrayList<>();
-    private ArrayList<Patient> patients = new ArrayList<>();
-
-    public void registerPatient(Patient p) {
-        patients.add(p);
-    }
-
-    public void addAppointment(Appointment appointment) {
-
-        Doctor d = appointment.getDoctor();
-
-        if (!d.canAddAppointment(appointment.getDateTime())) {
-            System.out.println("Doctor already has an appointment at this time.");
-            return;
+        public String getName() {
+            return name;
         }
 
-        appointments.add(appointment);
-        appointment.getPatient().addAppointment(appointment);
-        d.addAppointment(appointment);
-    }
+        public int getAge() {
+            return age;
+        }
 
-    public void showAppointmentsForPatient(Patient patient) {
-        System.out.println("\nAppointment for patient " + patient.getName());
-        for (Appointment a : patient.getAppointments()) {
-            a.print();
+        public void setName(String name) {
+            this.name = name;
+        }
+
+        public void setAge(int age) {
+            this.age = age;
+        }
+
+        public void introduce() {
+            System.out.println("My name is " + name + " and I'm " + age + " years old.");
         }
     }
 
-    public void showAppointmentsForDoctor(Doctor doctor) {
-        System.out.println("\nAppointments for " + doctor.getName());
-        for (Appointment a : doctor.getAppointments()) {
-            a.print();
+    abstract class Staff extends Person {
+
+        private String role;
+
+        public Staff(String name, int age, String role) {
+            super(name, age);
+
+            if (role == null || role.trim().isEmpty()) {
+                throw new IllegalArgumentException("Role can't be empty");
+            }
+            this.role = role;
+        }
+
+        public String getRole() {
+            return role;
+        }
+
+        public void setRole() {
+            this.role = role;
+        }
+
+        public abstract void performDuties();
+    }
+
+    static class Treatment {
+
+        private String name;
+
+        public Treatment(String name) {
+            this.name = name;
+        }
+
+        public String getName() {
+            return name;
         }
     }
 
-    public void addPrescription(Patient patient, Prescription prescription) {
-        patient.addPrescription(prescription);
+    static class Medicine extends Treatment {
+
+        public Medicine(String name) {
+            super(name);
+        }
     }
 
-    public void showPatientsWithMedicine(String medicineName) {
-        System.out.println("\nPatients with medicine: " + medicineName);
+    class Prescription {
 
-        for (Patient p : patients) {
-            for (Prescription pr : p.getPrescriptions()) {
-                for (Treatment t : pr.getTreatments()) {
-                    if (t instanceof Medicine && t.getName().equals(medicineName)) {
-                        System.out.println(p.getName() + " (Prescribed by " +
-                                pr.getDoctor().getName() + ")");
+        private Doctor doctor;
+        private ArrayList<Treatment> treatments = new ArrayList<>();
+
+        public Prescription(Doctor doctor) {
+            this.doctor = doctor;
+        }
+
+        public void addTreatment(Treatment t) {
+            treatments.add(t);
+        }
+
+        public Doctor getDoctor() {
+            return doctor;
+        }
+
+        public ArrayList<Treatment> getTreatments() {
+            return treatments;
+        }
+
+        public void print() {
+            System.out.println("Prescribed by: " + doctor.getName());
+            for (Treatment t : treatments) {
+                System.out.println("- " + t.getName());
+            }
+        }
+    }
+
+    class Appointment {
+
+        private String dateTime;
+        private Patient patient;
+        private Doctor doctor;
+
+        public Appointment(String dateTime, Patient patient, Doctor doctor) {
+            this.dateTime = dateTime;
+            this.patient = patient;
+            this.doctor = doctor;
+        }
+
+        public String getDateTime() {
+            return dateTime;
+        }
+
+        public Patient getPatient() {
+            return patient;
+        }
+
+        public Doctor getDoctor() {
+            return doctor;
+        }
+
+        public void print() {
+            System.out.println("Appointment at " + dateTime +
+                    " Patient: " + patient.getName() +
+                    " Doctor: " + doctor.getName());
+        }
+    }
+
+    class Patient extends Person implements Treatable {
+
+        private String condition;
+        private ArrayList<Prescription> prescriptions = new ArrayList<>();
+        private ArrayList<Appointment> appointments = new ArrayList<>();
+
+        public Patient(String name, int age, String condition) {
+            super(name, age);
+
+            if (condition == null || condition.trim().isEmpty()) {
+                throw new IllegalArgumentException("Condition can't be empty");
+            }
 
 
+            this.condition = condition;
+        }
+
+        public String getCondition() {
+            return condition;
+        }
+
+        public void setCondition(String condition) {
+            this.condition = condition;
+        }
+
+        public void receiveTreatment() {
+            System.out.print("Patient with condition \"" + condition + "\" is receiving treatment.");
+        }
+
+        public void addPrescription(Prescription p) {
+            prescriptions.add(p);
+        }
+
+        public ArrayList<Prescription> getPrescriptions() {
+            return prescriptions;
+        }
+
+        public void addAppointment(Appointment a) {
+            appointments.add(a);
+        }
+
+        public ArrayList<Appointment> getAppointments() {
+            return appointments;
+        }
+    }
+
+    class Doctor extends Staff {
+
+        private ArrayList<Appointment> appointments = new ArrayList<>();
+        private String medicine = "Antibiotics";
+
+
+        public Doctor(String name, int age) {
+            super(name, age, "Doctor");
+        }
+
+        public void performDuties() {
+            System.out.println("Doctor is treating patients and prescribing medicine");
+        }
+
+        public Prescription createPrescription() {
+            return new Prescription(this);
+        }
+
+        public boolean canAddAppointment(String dateTime) {
+            for (Appointment a : appointments) {
+                if (a.getDateTime().equals(dateTime))
+                    return false;
+            }
+            return true;
+        }
+
+        public void prescribeMedicine(Patient patient) {
+            System.out.println("Doctor prescribes " + medicine +
+                    " to patient " + patient.getName());
+        }
+
+        public void addAppointment(Appointment a) {
+            appointments.add(a);
+        }
+
+        public ArrayList<Appointment> getAppointments() {
+            return appointments;
+        }
+    }
+
+    class Nurse extends Staff {
+
+        public Nurse(String name, int age) {
+            super(name, age, "Nurse");
+        }
+
+        public void performDuties() {
+            System.out.println("Nurse is checking patient's condition and vitals");
+        }
+
+        public void checkVitals(Patient patient) {
+            System.out.println("Nurse is checking vitals of: " + patient.getName());
+        }
+    }
+
+    class Receptionist extends Staff {
+
+        public Receptionist(String name, int age) {
+            super(name, age, "Receptionist");
+        }
+
+        public void performDuties() {
+            System.out.println("Receptionist is scheduling appointments");
+        }
+    }
+
+    class ClinicSystem implements ClinicOperations {
+
+        private ArrayList<Appointment> appointments = new ArrayList<>();
+        private ArrayList<Patient> patients = new ArrayList<>();
+
+        public void registerPatient(Patient p) {
+            patients.add(p);
+        }
+
+        public void addAppointment(Appointment appointment) {
+
+            Doctor d = appointment.getDoctor();
+
+            if (!d.canAddAppointment(appointment.getDateTime())) {
+                System.out.println("Doctor already has an appointment at this time.");
+                return;
+            }
+
+            appointments.add(appointment);
+            appointment.getPatient().addAppointment(appointment);
+            d.addAppointment(appointment);
+        }
+
+        public void showAppointmentsForPatient(Patient patient) {
+            System.out.println("\nAppointment for patient " + patient.getName());
+            for (Appointment a : patient.getAppointments()) {
+                a.print();
+            }
+        }
+
+        public void showAppointmentsForDoctor(Doctor doctor) {
+            System.out.println("\nAppointments for " + doctor.getName());
+            for (Appointment a : doctor.getAppointments()) {
+                a.print();
+            }
+        }
+
+        public void addPrescription(Patient patient, Prescription prescription) {
+            patient.addPrescription(prescription);
+        }
+
+        public void showPatientsWithMedicine(String medicineName) {
+            System.out.println("\nPatients with medicine: " + medicineName);
+
+            for (Patient p : patients) {
+                for (Prescription pr : p.getPrescriptions()) {
+                    for (Treatment t : pr.getTreatments()) {
+                        if (t instanceof Medicine && t.getName().equals(medicineName)) {
+                            System.out.println(p.getName() + " (Prescribed by " +
+                                    pr.getDoctor().getName() + ")");
+
+
+                        }
                     }
                 }
             }
@@ -393,4 +395,3 @@ class ClinicSystem implements ClinicOperations {
 }
 
 
-}
