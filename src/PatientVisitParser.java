@@ -3,11 +3,15 @@ import java.nio.file.*;
 import java.util.*;
 import java.util.regex.*;
 
-/** description */
+/// Entry point
+/// Reads patient visit records from a CSV file
+/// Performs basic input validation, and starts parsing
+
 public class PatientVisitParser {
 
+    /// Loads visit data from a CSV file and generates a summary report
     public static void main(String[] args) {
-        // Name of the CSV file (must be in the project root directory)
+        // Name of the CSV file (Must be in the project root directory)
         String filePath = "data (1).csv";
 
         // List that will store all accurately read patient visits
@@ -49,7 +53,9 @@ public class PatientVisitParser {
     }
 }
 
-/** Short description */
+/// Represents a single patient visit
+/// Encapsulates input data and parsed medical information
+
 class PatientVisit {
 
     // Raw input values
@@ -64,14 +70,14 @@ class PatientVisit {
     private String medications;
     private String doctor;
 
-    /** Short description */
+    /// Creates a patient visit object and triggers data parsing
     public PatientVisit(String rawDate, String description) {
-        this.rawDate = rawDate;
-        this.description = description;
+        this.rawDate = rawDate; // Visit date from the CSV file
+        this.description = description; // Text visit description
         parse();
     }
 
-    /** Short description */
+    /// Extracts required medical data using regular expressions
     private void parse() {
         // Date in format YYYY-MM-DD
         date = RegexUtils.find("\\d{4}-\\d{2}-\\d{2}", rawDate);
@@ -92,12 +98,12 @@ class PatientVisit {
         doctor = RegexUtils.find("Doctor: [A-Za-z]+, [A-Za-z]+", description);
     }
 
-    /** Short description */
+    /// Checks whether medication information was found
     public boolean tookDrugs() {
-        return !medications.equals("not found");
+        return !medications.equals("not found"); // True if a patient took medication, false otherwise
     }
 
-    /** description */
+    @Override
     public String toString() {
         return "Date: " + date + "\n" +
                 "Age: " + age + "\n" +
@@ -108,22 +114,23 @@ class PatientVisit {
     }
 }
 
-/** description */
+/// Utility class providing helper methods for regular expression matching
 class RegexUtils {
 
-    /** description */
+    /// Searches for the first occurrence of a regex pattern in the given text
     public static String find(String regex, String text) {
-        Pattern pattern = Pattern.compile(regex);
-        Matcher matcher = pattern.matcher(text);
+        Pattern pattern = Pattern.compile(regex); // Regex - regular expression pattern
+        Matcher matcher = pattern.matcher(text); // Text - input text
 
-        return matcher.find() ? matcher.group() : "not found";
+        return matcher.find() ? matcher.group() : "not found"; // Return matched value or "not found" if no match exists
     }
 }
 
-/** description */
+/// Generates formatted output and summary statistics based on parsed patient visit data
 class ReportGenerator {
 
-    public static void generate(List<PatientVisit> visits) {
+    /// Prints a summary report of all parsed visits
+    public static void generate(List<PatientVisit> visits) { // Visits = list of patient visits records
         System.out.println("Number of records: " + visits.size());
 
         // Count patients who took medication
