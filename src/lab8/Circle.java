@@ -1,3 +1,5 @@
+package lab8;
+
 public class Circle {
 
     //Attributes
@@ -28,7 +30,7 @@ public class Circle {
 
     public String inf() {
         return
-                "Circle metrics: \n" +
+                "lab8.Circle metrics: \n" +
                 "Radius: " + radius +
                 "\nCircumference: " + circumference() +
                 "\nArea: " + area();

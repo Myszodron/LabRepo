@@ -1,3 +1,5 @@
+package lab8;
+
 class Matrix {
 
     //Attributes

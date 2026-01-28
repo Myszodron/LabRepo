@@ -1,4 +1,4 @@
-import java.util.*;
+package lab8;
 
 public class Sphere {
 
@@ -30,7 +30,7 @@ public class Sphere {
     }
 
     public String inf() {
-        return "Sphere:\n" +
+        return "lab8.Sphere:\n" +
                 "Radius: " + radius +
                 "\nSurface area: " +surfaceArea() +
                 "\nVolume: " + volume();

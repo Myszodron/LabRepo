@@ -1,11 +1,11 @@
-//Variables - private - encapsulation
+package lab8;//Variables - private - encapsulation
 //Constructors - public - can create objects from outside the class
 //Getters and Setters - public - outside code can read or update in a controlled way
 //Math Methods - public - define behavior of the class outside
 //Helper Functions - private - internal     implemented details
 
 public class Main {
-    //Main doesn't contain any attributes
+    //lab8.Main doesn't contain any attributes
     public static void main(String[] args) {
 
         Circle c = new Circle(4.0);
@@ -21,9 +21,9 @@ public class Main {
         m.fillRandom();
         n.fillRandom();
 
-        System.out.print("Matrix M:\n");
+        System.out.print("lab8.Matrix M:\n");
         System.out.print(m.print());
-        System.out.print("Matrix N:\n");
+        System.out.print("lab8.Matrix N:\n");
         System.out.print(n.print());
 
         System.out.print("Spiral M:\n");

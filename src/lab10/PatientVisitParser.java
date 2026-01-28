@@ -1,4 +1,4 @@
-package lab;
+package lab10;
 
 import java.io.*;
 import java.nio.file.*;
