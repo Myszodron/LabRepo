@@ -1,4 +1,4 @@
-package clinicTest;//https://github.com/Myszodron
+package lab910;//https://github.com/Myszodron
 import  java.util.ArrayList;
 
 public class ClinicTest {
