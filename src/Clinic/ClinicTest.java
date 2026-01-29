@@ -1,9 +1,10 @@
-package lab910;//https://github.com/Myszodron
+package Clinic;//https://github.com/Myszodron
 import  java.util.ArrayList;
 
 public class ClinicTest {
 
     public static void main(String[] args) {
+
         new ClinicTest().clinicInterface();
     }
 
@@ -13,6 +14,7 @@ public class ClinicTest {
 
         Patient p1 = new Patient("Daria", 24, "Influenza");
         Patient p2 = new Patient("Jan", 18, "Broken leg");
+
 
         Doctor d1 = new Doctor("Dr. Kowalski", 42);
         Nurse n1 = new Nurse("Hanna", 38);
@@ -80,7 +82,7 @@ public class ClinicTest {
         void showPatientsWithMedicine(String medicineName);
     }
 
-    abstract class Person {
+    abstract static class Person {
 
         private String name;
         private int age;
@@ -118,7 +120,7 @@ public class ClinicTest {
         }
     }
 
-    abstract class Staff extends Person {
+    abstract static class Staff extends Person {
 
         private String role;
 
@@ -162,7 +164,7 @@ public class ClinicTest {
         }
     }
 
-    class Prescription {
+    static class Prescription {
 
         private Doctor doctor;
         private ArrayList<Treatment> treatments = new ArrayList<>();
@@ -191,7 +193,7 @@ public class ClinicTest {
         }
     }
 
-    class Appointment {
+    static class Appointment {
 
         private String dateTime;
         private Patient patient;
@@ -222,7 +224,7 @@ public class ClinicTest {
         }
     }
 
-    class Patient extends Person implements Treatable {
+    public static class Patient extends Person implements Treatable {
 
         private String condition;
         private ArrayList<Prescription> prescriptions = new ArrayList<>();
@@ -268,7 +270,7 @@ public class ClinicTest {
         }
     }
 
-    class Doctor extends Staff {
+    public static class Doctor extends Staff {
 
         private ArrayList<Appointment> appointments = new ArrayList<>();
         private String medicine = "Antibiotics";
