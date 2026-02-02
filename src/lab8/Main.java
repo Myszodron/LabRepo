@@ -1,8 +1,9 @@
-package lab8;//Variables - private - encapsulation
+package lab8;
+//Variables - private - encapsulation
 //Constructors - public - can create objects from outside the class
 //Getters and Setters - public - outside code can read or update in a controlled way
 //Math Methods - public - define behavior of the class outside
-//Helper Functions - private - internal     implemented details
+//Helper Functions - private - internal implemented details
 
 public class Main {
     //lab8.Main doesn't contain any attributes
