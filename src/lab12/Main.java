@@ -58,8 +58,11 @@ public class Main {
         }
         System.out.println("]");
 
+
         System.out.println("Labeled elements:");
         System.out.println("[4a, 2a, 3a, 2b, 1, 3b, 4b]");
+        // Letters are used to observe whether the elements with the same value
+        // keep their relative order after sorting
 
         HeapSort sorter = new HeapSort(testData);
         sorter.sort();
