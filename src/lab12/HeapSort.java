@@ -1,20 +1,20 @@
 package lab12;
 
 /**
- * Encapsulates the heap sort algorithm.
+ * Encapsulates the heap sort algorithm
  *
- * The class owns the array it sorts and uses a MaxHeap
- * to perform the sorting operation.
+ * Class owns the array it sorts and uses a MaxHeap
+ * to perform the sorting operation
  *
  * Heap Sort has a time complexity of O(n log n) in all cases
- * and is not a stable sorting algorithm.
+ * and is not a stable sorting algorithm
  */
 public class HeapSort {
 
     private final int[] data;
 
     /**
-     * Creates a HeapSort object for the given array.
+     * Creates a HeapSort object for the given array
      *
      * @param array array to be sorted
      */
@@ -23,7 +23,7 @@ public class HeapSort {
     }
 
     /**
-     * Sorts the internal array in ascending order.
+     * Sorts the internal array in ascending order
      */
     public void sort() {
         MaxHeap heap = new MaxHeap(data);
@@ -34,7 +34,7 @@ public class HeapSort {
     }
 
     /**
-     * Checks whether the array is sorted correctly.
+     * Checks whether the array is sorted correctly
      *
      * @return true if sorted, false otherwise
      */
@@ -48,7 +48,7 @@ public class HeapSort {
     }
 
     /**
-     * Returns the sorted array.
+     * Returns the sorted array
      *
      * @return sorted array
      */

@@ -1,14 +1,14 @@
 package lab12;
 
 /**
- * MaxHeap represents a binary max heap implemented using an array.
+ * MaxHeap represents a binary max heap implemented using an array
  *
  * In a max heap, each parent node has a value greater than or equal
  * to its children. The largest element is therefore always stored
- * at the root (index 0).
+ * at the root (index 0)
  *
- * Class encapsulates heap construction and heap operations.
- * Contains no input/output logic.
+ * Class encapsulates heap construction and heap operations
+ * Contains no input/output logic
  */
 public class MaxHeap {
 
@@ -16,7 +16,7 @@ public class MaxHeap {
     private int heapSize;
 
     /**
-     * Creates a MaxHeap from the given array.
+     * Creates a MaxHeap from the given array
      * The heap is built form bottom-up
      *
      * @param array array to be transformed into a heap
@@ -29,7 +29,7 @@ public class MaxHeap {
 
     /**
      * Builds the heap by restoring the heap property
-     * starting from the last non-leaf node.
+     * starting from the last non-leaf node
      */
     private void buildHeap() {
         for (int i = heapSize / 2 - 1; i >= 0; i--) {
@@ -38,7 +38,7 @@ public class MaxHeap {
     }
 
     /**
-     * Removes and returns the maximum element from the heap.
+     * Removes and returns the maximum element from the heap
      *
      * @return maximum value in the heap
      * @throws IllegalStateException if the heap is empty
@@ -57,7 +57,7 @@ public class MaxHeap {
     }
 
     /**
-     * Restores the heap property by moving an element downward.
+     * Restores the heap property by moving an element downward
      *
      * @param index starting position
      */
