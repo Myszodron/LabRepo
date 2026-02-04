@@ -77,7 +77,7 @@ public class Main {
         System.out.println(
                 "Elements with equal values (e.g. 2a and 2b, 3a and 3b)\n" +
                         "do not have their original relative order guaranteed\n" +
-                        "So Heap Sort isn't stable."
+                        "So Heap Sort isn't stable"
         );
     }
 
